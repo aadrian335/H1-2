@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class StudentDB {
     private static final StudentDB ourInstance = new StudentDB();
 
-    protected ArrayList<Student> mStudents;
+    static public ArrayList<Student> mStudents; //changed from protected
 
     static public StudentDB getInstance() { return ourInstance; }
 
@@ -15,9 +15,21 @@ public class StudentDB {
 
     public void setmStudents(ArrayList<Student> students) { mStudents = students; }
 
+    static public void setStudentObjects(String fn, String ln, int cwid) {
+        Student p = new Student(fn, ln, cwid);
+        ArrayList<Course> courses = new ArrayList<Course>();
+        courses.add(new Course("CPSC411", "A"));
+        p.setmCourses(courses);
+        //mStudents = new ArrayList<Student>();
+        mStudents.add(p);
+    }
+
     protected void createStudentObjects() {
         // Create Student object
-        Student p = new Student("John", "Smith", 445343221);
+
+
+
+        Student p = new Student("First Name:   ", "   Last Name:   ", 0);
         ArrayList<Course> courses = new ArrayList<Course>();
         courses.add(new Course("CPSC411", "A"));
         p.setmCourses(courses);
@@ -26,11 +38,15 @@ public class StudentDB {
         //ArrayList<Student> personList = new ArrayList<Student>();
         //personList.add(p);
         // Create another Student object
-        p = new Student("William", "Lee", 445343256);
+        /*
+        p = new Student("", "", 0);
         courses = new ArrayList<Course>();
         courses.add(new Course("CPSC359", "B+"));
         p.setmCourses(courses);
         mStudents.add(p);
+        */
+
+
         //personList.add(p);
         //
         //StudentDB.getInstance().setmStudents(personList);

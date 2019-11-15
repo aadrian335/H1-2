@@ -13,6 +13,8 @@ import com.example.hw_part1and2.model.Course;
 import com.example.hw_part1and2.model.Student;
 import com.example.hw_part1and2.model.StudentDB;
 
+import java.util.ArrayList;
+
 public class StudentDetailActivity extends AppCompatActivity {
 
     protected Menu detailMenu;
@@ -38,6 +40,7 @@ public class StudentDetailActivity extends AppCompatActivity {
         cWidView.setEnabled(false);
 
         // Populate Course
+
 
     }
 

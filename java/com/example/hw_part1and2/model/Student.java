@@ -8,6 +8,10 @@ public class Student {
     protected int mCwid;
     protected ArrayList<Course> mCourses;
 
+    public Student() {
+
+    }
+
     public Student(String mFirstName, String mLastName, int mCwid) {
         this.mFirstName = mFirstName;
         this.mLastName = mLastName;

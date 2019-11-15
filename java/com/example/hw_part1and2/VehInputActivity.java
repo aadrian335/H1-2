@@ -4,7 +4,10 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -16,6 +19,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hw_part1and2.model.Course;
+import com.example.hw_part1and2.model.Student;
 import com.example.hw_part1and2.model.StudentDB;
 
 import org.w3c.dom.Text;
@@ -42,20 +47,83 @@ public class VehInputActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_veh_input);
 
-        int studentIndex = getIntent().getIntExtra("StudentIndex", 0);
+        final int studentIndex = getIntent().getIntExtra("StudentIndex", 0);
+
 
         fN = (EditText) findViewById(R.id.editText); // First Name
+        lN = (EditText) findViewById(R.id.editText2); // Last Name
+        cWid = (EditText) findViewById(R.id.editText3); // CWID
+
+
+        fN.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                StudentDB.getInstance().getmStudents().get(studentIndex).setmFirstName(fN.getText().toString());
+
+            }
+        });
+
+        lN.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                StudentDB.getInstance().getmStudents().get(studentIndex).setmLastName(lN.getText().toString());
+
+
+            }
+        });
+
+        cWid.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                StudentDB.getInstance().getmStudents().get(studentIndex).setmCwid(Integer.parseInt(cWid.getText().toString()));
+
+
+            }
+        });
+
         bt = (Button) findViewById(R.id.button);
         lv = (ListView) findViewById(R.id.lv_added);
         addCoursebt = (Button) findViewById(R.id.addCbutton);
 
         arrayList = new ArrayList<String>();
+
         adapter = new ArrayAdapter<>(VehInputActivity.this, android.R.layout.simple_list_item_1, arrayList);
-        StudentDB.getInstance().getmStudents().get(studentIndex).setmFirstName(fN.getText().toString());
+        //StudentDB.getInstance().getmStudents().get(studentIndex).setmFirstName(fN.getText().toString());
+
+
         lv.setAdapter(adapter);
 
         onBtnClick();
-
 
         onAddCBtnClick();
     }
@@ -65,11 +133,22 @@ public class VehInputActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String firstName = fN.getText().toString();
+                String lastName = lN.getText().toString();
+                String text = cWid.getText().toString();
+                int cwid = Integer.parseInt(text);
 
-                arrayList.add(firstName);
+                StudentDB.setStudentObjects(firstName, lastName, cwid);
+
+                //arrayList.add(firstName);
                 adapter.notifyDataSetChanged();
+                openSummActivity();
             }
         });
+    }
+
+    public void openSummActivity() {
+        Intent intent = new Intent(this, SummaryLVActivity.class);
+        startActivity(intent);
     }
 
     public void onAddCBtnClick() {

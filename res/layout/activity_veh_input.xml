@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="First Name" />
+                android:text="First Name222" />
 
             <EditText
                 android:id="@+id/editText2"
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="CWID" />
+                android:text="1234567" />
 
 
             <Button
